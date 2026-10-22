@@ -22,6 +22,15 @@ def store_url(code, url):
     dbConn.commit()
     dbConn.close()
 
+def get_code(url :str):
+    dbConn = sqlite3.connect("urls.db")
+    result = dbConn.execute(
+        "SELECT code FROM urls WHERE url = ?",
+        (url,)
+    ).fetchone()
+    dbConn.close()
+
+    return result[0] if result else None
 
 def get_url(code):
     dbConn = sqlite3.connect("urls.db")
