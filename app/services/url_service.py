@@ -4,21 +4,23 @@ import string
 
 maxLength = 8
 
-def generate_code():
-    return ''.join(random.choices(string.ascii_letters + string.digits, k=maxLength))
+class codeGenerator:
+    def generate_code(self):                     
+        return ''.join(random.choices(string.ascii_letters + string.digits, k=maxLength))
 
-def shorten_url(url: str):
-    code = get_code(url)
+generator = codeGenerator()                       
+class codeShortner:
+    def shorten_url(self, url: str):             
+        code = get_code(url)
 
-    if code:
+        if code:
+            return code
+        code = generator.generate_code()         
+        store_url(code, url)
+
         return code
-    code = generate_code()
-    store_url(code, url)
 
-    return code
-    
+shortener = codeShortner()                      
+
 def resolve_url(code: str):
     return get_url(code)
-
-    
-    
